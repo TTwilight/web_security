@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+    <!--<form action="add/" method="get">-->
+        <!--a:<input type="text" name="a"/>-->
+        <!--b:<input type="text" name="b"/>-->
+        <!--<input type="submit" value="提交" />-->
+    <!--</form>-->
+    <form method="post">
+        {% csrf_token %}
+        <p>第一个数字：{{ form.a }}</p>
+        <p>第二个数字：{{ form.b }}</p>
+        <p>提示信息：{{ form.c }}</p>
+        <p>当前时间：{{ form.d }}</p>
+        <input type="submit" value="提交" />
+    </form>
+</body>
+</html>
