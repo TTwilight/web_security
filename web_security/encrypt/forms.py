@@ -7,8 +7,8 @@ from datetime import datetime
 #     cc_myself=forms.BooleanField(required=False)    #默认每个类型都必须有值，选择required=false使之可以没有值
 
 class AddForm(forms.Form):
-    a=forms.IntegerField()
-    b=forms.IntegerField()
-    c=forms.CharField(max_length=100,initial="hello")
-    d=forms.DateField(initial=datetime.now)
+    a = forms.CharField(max_length=100)
+    b = forms.CharField(max_length=100)
+
+
 

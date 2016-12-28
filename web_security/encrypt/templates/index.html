@@ -10,13 +10,27 @@
         <!--b:<input type="text" name="b"/>-->
         <!--<input type="submit" value="提交" />-->
     <!--</form>-->
-    <form method="post">
-        {% csrf_token %}
-        <p>第一个数字：{{ form.a }}</p>
-        <p>第二个数字：{{ form.b }}</p>
-        <p>提示信息：{{ form.c }}</p>
-        <p>当前时间：{{ form.d }}</p>
-        <input type="submit" value="提交" />
+   <p>请选择你要进行的操作:</p>
+    <form method="post">{% csrf_token %}
+
+        <select  name="test">
+            <option selected="selected">请选择</option>
+            <option value="1" >加密</option>
+            <option value="2" >解密</option>
+        </select>
+
+    {% if choice %}
+        <p>{{ jiami1 }}文本：</p>{{ form.a }}
+        <p>{{ jiami2 }}密钥：</p>{{ form.b }}
+        <p>获得密文：<textarea>{{ ciphertext }}</textarea></p>
+        <input type="submit" />
+    {% else %}
+        <p>{{ jiemi1 }}文本：</p>{{ form.a }}
+        <p>{{ jiemi2 }}密钥：</p>{{ form.b }}
+        <p>获得明文：<textarea>{{ plaintext }}</textarea></p>
+        <input type="submit" />
+    {% endif %}
     </form>
+
 </body>
 </html>
