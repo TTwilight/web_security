@@ -15,12 +15,12 @@ def index(request):
                 a = form.cleaned_data['a']
                 b = form.cleaned_data['b']
                 plaintext = AESdecrypt(a, b)
-                return render(request, 'index.html',
+                return render(request, 'encrypt/index.html',
                               {'choice': choice,'form': form, 'plaintext': plaintext,
                                'jiemi1':'要解密的','jiemi2':'你解密的','jiemi3':'明'})
         else:
             form = AddForm()
-        return render(request, 'index.html', {'choice': choice, 'form': form})
+        return render(request, 'encrypt/index.html', {'choice': choice, 'form': form})
 
     else:
         choice = True
@@ -30,18 +30,13 @@ def index(request):
                 a = form.cleaned_data['a']
                 b = form.cleaned_data['b']
                 ciphertext = AESencrypt(a, b)
-                return render(request, 'index.html',
+                return render(request, 'encrypt/index.html',
                               {'choice': choice,'form': form, 'ciphertext': ciphertext,
                                'jiami1': '要加密的', 'jiami2': '你加密的','jiami3':'密'})
         else:
             form = AddForm()
-        return render(request, 'index.html', {'choice': choice, 'form': form})
-# def add(request):
-#     a=request.GET['a']
-#     b=request.GET['b']
-#     a=int(a)
-#     b=int(b)
-#     return HttpResponse(str(a+b))
+        return render(request, 'encrypt/index.html', {'choice': choice, 'form': form})
+
 
 def AESencrypt(text,key):
     while len(str(key))%16!=0:
@@ -60,5 +55,5 @@ def AESdecrypt(ciphertext,key):
     mode = AES.MODE_CBC
     decrytor = AES.new(key, mode, b'0000000000000000')
     ciphertext=a2b_hex(ciphertext)
-    plaintext=decrytor.decrypt(ciphertext)
+    plaintext=decrytor.decrypt(ciphertext).strip()
     return plaintext

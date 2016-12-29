@@ -11,7 +11,8 @@
         <!--<input type="submit" value="提交" />-->
     <!--</form>-->
    <p>请选择你要进行的操作:</p>
-    <form method="post">{% csrf_token %}
+    <form method="post">
+        {% csrf_token %}
 
         <select  name="test">
             <option selected="selected">请选择</option>
