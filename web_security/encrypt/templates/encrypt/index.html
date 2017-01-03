@@ -16,59 +16,36 @@
     <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
 </head>
-<body>
+<body style="background-color: darkgrey">
     <!--导航栏-->
-    <nav>
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab">AES</a></li>
-          <li role="presentation"><a href="#profile" role="tab" data-toggle="tab">DES</a></li>
-          <li role="presentation"><a href="#messages" role="tab" data-toggle="tab">Messages</a></li>
-          <li role="presentation"><a href="#settings" role="tab" data-toggle="tab">Settings</a></li>
-        </ul>
-    </nav>
-    <div class="tab-content">
-        <!--AES加解密-->
-        <div role="tabpanel" class="tab-pane active" id="home">
-            <p>请选择你要进行的AES操作:</p>
-            <form method="post">
+
+
+        <div class="tab-content text-center text-primary">
+            <p>请选择你要进行的操作:</p>
+
+            <form method="post" >
                 {% csrf_token %}
-
-                <select  name="test">
-                    <option selected="selected" >请选择</option>
-                    <option value="1" >AES加密</option>
-                    <option value="2" >AES解密</option>
+                <select  name="jiami_type" class="btn btn-primary">
+                    <option >请选择加密算法</option>
+                    <option value="a" >AES加密</option>
+                    <option value="b" >DES加密</option>
                 </select>
-
-                {% if choice %}
+                <select  name="jiami_action" class="btn btn-primary">
+                    <option >请选择操作方式</option>
+                    <option value="1" >加密</option>
+                    <option value="2" >解密</option>
+                </select>
+                    <h2>{{ zhuangtai }}</h2>
                     <div>
-                        <p>{{ jiami1 }}文本：<br><span style="width:400px;height:300px;">{{ form.a }}</span></p>
+                        <p>{{ jiami1 }}请输入文本/密文：<br><span style="width:400px;height:300px;">{{ form.a }}</span></p>
                         <p>{{ jiami2 }}密钥：<br><span style="width:400px;height:100px;">{{ form.b }}</span></p>
-                        <p>获得密文：<br><textarea style="width: 400px;height:300px;">{{ ciphertext }}</textarea></p>
-                        <input type="submit" value="ok"/>
+                        <p>获得结果：<br><textarea style="width: 400px;height:300px;">{{ text }}</textarea></p>
+                        <input type="submit" value="开始" class="btn btn-primary"/>
                     </div>
-                {% else %}
-                   <div>
-                        <p>{{ jiemi1 }}文本：<br><span style="width:400px;height:300px;">{{ form.a }}</span></p>
-                        <p>{{ jiemi2 }}密钥：<br><span style="width:400px;height:100px;">{{ form.b }}</span></p>
-                        <p>获得密文：<br><textarea style="width: 400px;height:300px;">{{ plaintext }}</textarea></p>
-                        <input type="submit" value="ok"/>
-                   </div>
-                {% endif %}
+
             </form>
         </div>
 
-        <!--DES加密-->
-        <div role="tabpanel" class="tab-pane" id="profile">
-            DES COMING SOON...
-        </div>
 
-        <div role="tabpanel" class="tab-pane" id="messages">
-            RC2 COMING SOON...
-        </div>
-        <div role="tabpanel" class="tab-pane" id="settings">
-            COMING SOON...
-        </div>
-
-    </div>
 </body>
 </html>

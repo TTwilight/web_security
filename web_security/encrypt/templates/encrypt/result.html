@@ -2,9 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ form }}</title>
+    <title>index</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
 </head>
 <body>
+    <!--导航栏-->
+    <nav>
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#AES" role="tab" data-toggle="tab">AES</a></li>
+          <li role="presentation"><a href="#DES" role="tab" data-toggle="tab">DES</a></li>
+          <li role="presentation"><a href="#messages" role="tab" data-toggle="tab">Messages</a></li>
+          <li role="presentation"><a href="#settings" role="tab" data-toggle="tab">Settings</a></li>
+        </ul>
+    </nav>
+    <div class="tab-content">
+        <!--AES加解密-->
+        <div role="tabpanel" class="tab-pane active" id="AES">
+            <p>请选择你要进行的AES操作:</p>
+            <form method="post">
+                {% csrf_token %}
+                当前加密方式：<input type="checkbox" name="jiami_type" checked="checked" value="AES"/>AES<br>
+                <select  name="test">
+                    <option selected="selected" >请选择</option>
+                    <option value="1" >AES加密</option>
+                    <option value="2" >AES解密</option>
+                </select>
 
+                {% if choice %}
+                    <div>
+                        <p>{{ jiami1 }}文本：<br><span style="width:400px;height:300px;">{{ form.a }}</span></p>
+                        <p>{{ jiami2 }}密钥：<br><span style="width:400px;height:100px;">{{ form.b }}</span></p>
+                        <p>获得密文：<br><textarea style="width: 400px;height:300px;">{{ ciphertext }}</textarea></p>
+                        <input type="submit" value="ok"/>
+                    </div>
+                {% else %}
+                   <div>
+                        <p>{{ jiemi1 }}文本：<br><span style="width:400px;height:300px;">{{ form.a }}</span></p>
+                        <p>{{ jiemi2 }}密钥：<br><span style="width:400px;height:100px;">{{ form.b }}</span></p>
+                        <p>获得密文：<br><textarea style="width: 400px;height:300px;">{{ plaintext }}</textarea></p>
+                        <input type="submit" value="ok"/>
+                   </div>
+                {% endif %}
+            </form>
+        </div>
+
+        <!--DES加密-->
+        <div role="tabpanel" class="tab-pane" id="DES">
+            <p>请选择你要进行的DES操作:</p>
+            <form method="post">
+                {% csrf_token %}
+                当前加密方式：<input type="checkbox" name="jiami_type" checked="checked" value="DES"/>DES<br>
+                <select  name="test">
+                    <option selected="selected" >请选择</option>
+                    <option value="1" >DES加密</option>
+                    <option value="2" >DES解密</option>
+                </select>
+
+                {% if choice %}
+                    <div>
+                        <p>{{ jiami1 }}文本：<br><span style="width:400px;height:300px;">{{ form.a }}</span></p>
+                        <p>{{ jiami2 }}密钥：<br><span style="width:400px;height:100px;">{{ form.b }}</span></p>
+                        <p>获得密文：<br><textarea style="width: 400px;height:300px;">{{ ciphertext }}</textarea></p>
+                        <input type="submit" value="ok"/>
+                    </div>
+                {% else %}
+                   <div>
+                        <p>{{ jiemi1 }}文本：<br><span style="width:400px;height:300px;">{{ form.a }}</span></p>
+                        <p>{{ jiemi2 }}密钥：<br><span style="width:400px;height:100px;">{{ form.b }}</span></p>
+                        <p>获得密文：<br><textarea style="width: 400px;height:300px;">{{ plaintext }}</textarea></p>
+                        <input type="submit" value="ok"/>
+                   </div>
+                {% endif %}
+            </form>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="messages">
+            RC2 COMING SOON...
+        </div>
+        <div role="tabpanel" class="tab-pane" id="settings">
+            COMING SOON...
+        </div>
+
+    </div>
 </body>
 </html>
