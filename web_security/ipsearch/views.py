@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,Http404
-from urllib.request import urlopen,urlretrieve
-from bs4 import BeautifulSoup
+from urllib.request import urlopen,urlretrieve,Request
+import nmap
 import json
 import os
 from binascii import a2b_hex,b2a_hex
@@ -24,8 +24,30 @@ def index(request):
         baiduapi='http://api.map.baidu.com/staticimage/v2?ak=hNFf8i21Y8lPPlNbMXvt247DCIrtbDIR&center='+longitude+','+latitude+'&width=400&height=400&zoom=12'
         path=os.path.join(os.path.abspath('.')+'/ipsearch/static/ipsearch/')+'test.jpg'     #部署注意修改文件权限，不然不能访问，chmod 777 ipsearch/*
         urlretrieve(baiduapi,path)
+        ports=showport(ipaddress)
     else:
         country=''
         address=''
         time_zone=''
-    return render(request,'ipsearch/index.html',{'ipadd' :ipaddress,'country':country,'address':address,'time_zone':time_zone})
+        ports=''
+    return render(request,'ipsearch/index.html',{'ipadd' :ipaddress,'country':country,'address':address,'time_zone':time_zone,'ports':ports})
+
+def showport(ip):
+    ip=str(ip)
+    ports = []
+    nm=nmap.PortScanner()
+    ret=nm.scan(ip,'0-10000')
+    com_ports=ret['scan']
+    if com_ports:
+        com_ports=com_ports[ip]
+        if com_ports:
+            com_ports=com_ports['tcp']
+
+            for k in com_ports.keys():
+                if com_ports[k]['state']=='open':
+                    ports.append(k)
+            return ports
+        else:
+            return ports
+    else:
+        return ports
