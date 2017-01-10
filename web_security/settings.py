@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['139.199.183.196','127.0.0.1','www.ttwilight.cn',]
 
 
-# Application definition
+# Application definition  c
 
 INSTALLED_APPS = [
     'encrypt',
