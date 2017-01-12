@@ -24,13 +24,12 @@ def index(request):
         baiduapi='http://api.map.baidu.com/staticimage/v2?ak=hNFf8i21Y8lPPlNbMXvt247DCIrtbDIR&center='+longitude+','+latitude+'&width=400&height=400&zoom=12'
         path=os.path.join(os.path.abspath('.'),'ipsearch/static/ipsearch/')+'test.jpg'     #部署注意修改文件权限，不然不能访问，chmod 777 ipsearch/*
         urlretrieve(baiduapi,path)
-        ports=showport(ipaddress)
     else:
         country=''
         address=''
         time_zone=''
-        ports=''
-    return render(request,'ipsearch/index.html',{'ipadd' :ipaddress,'country':country,'address':address,'time_zone':time_zone,'ports':ports})
+
+    return render(request,'ipsearch/index.html',{'ipadd' :ipaddress,'country':country,'address':address,'time_zone':time_zone,})
 
 def showport(ip):
     ip=str(ip)

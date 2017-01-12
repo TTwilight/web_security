@@ -56,7 +56,12 @@ ROOT_URLCONF = 'web_security.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates'),],
+        'DIRS': [
+            os.path.join(BASE_DIR,'templates'),
+            os.path.join(BASE_DIR,'encrypt/templates'),
+            os.path.join(BASE_DIR,'ipsearch/templates'),
+            os.path.join(BASE_DIR,'scanner/templates'),
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

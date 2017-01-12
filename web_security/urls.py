@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^encrypt/',include('encrypt.urls')),
     url(r'^ipsearch/',include('ipsearch.urls')),
+    url(r'^scanner/',include(('scanner.urls'))),
 
 ]

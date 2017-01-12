@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HOME</title>
+    <title>扫描</title>
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 
 <!-- 可选的Bootstrap主题文件（一般不用引入） -->
@@ -17,15 +17,32 @@
 <body style="background-color:	#BEBEBE	;font-size: 16px" class="text-warning">
         <nav class="text-center col-xs-6 col-xs-offset-3" style="padding-top: 30px">
             <ul class="nav nav-pills" role="tablist">
-                <li role="presentation" class="active"><a href="/">Home</a></li>
+                <li role="presentation"><a href="/">Home</a></li>
                 <li role="presentation"><a href="/encrypt">加密</a></li>
-                <li role="presentation"><a href="/ipsearch">IP查询</a></li>
-                <li role="presentation"><a href="/scanner">扫描</a></li>
+                <li role="presentation" ><a href="/ipsearch">IP查询</a></li>
+                <li role="presentation" class="active"><a href="/scanner">扫描</a></li>
                 <li role="presentation"><a href="/admin/">管理员</a></li>
             </ul>
         </nav>
-        <div class="text-center col-xs-6 col-xs-offset-3">
-            <h1>欢迎访问！！！！！！</h1>
-        </div>
+    <div class="text-center col-xs-6 col-xs-offset-3">
+        <p class="text-center">请输入要扫描的域名或ip地址:</p>
+        <form method="post">
+            {% csrf_token %}
+            <input class='btn form-group' type="text" name="host_name"/>
+            <input class='btn form-group' type="submit" />
+        </form>
+        <table>
+            {% for key,value in tcps.items %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value.state }}</td>
+                    <td>{{ value.name }}</td>
+                    <td>{{ value.product }}</td>
+                    <td>{{ value.version }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
 </body>
 </html>
