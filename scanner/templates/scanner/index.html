@@ -14,7 +14,7 @@
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
-<body style="background-color:	#BEBEBE	;font-size: 16px" class="text-warning">
+<body style="background-color:	#000000	;font-size: 16px" class="text-warning">
         <nav class="text-center col-xs-6 col-xs-offset-3" style="padding-top: 30px">
             <ul class="nav nav-pills" role="tablist">
                 <li role="presentation"><a href="/">Home</a></li>
@@ -31,7 +31,18 @@
             <input class='btn form-group' type="text" name="host_name"/>
             <input class='btn form-group' type="submit" />
         </form>
-        <table>
+        <table class="table ">
+                <tr>
+                    <td colspan="5"><b><span class="text-center">扫描结果: {{ host }}</span></b></td>
+                </tr>
+                <tr>
+                    <th>端口号</th>
+                    <th>端口状态</th>
+                    <th>端口服务</th>
+                    <th>端口组件</th>
+                    <th>组件版本</th>
+                </tr>
+            {% if tcps %}
             {% for key,value in tcps.items %}
                 <tr>
                     <td>{{ key }}</td>
@@ -41,6 +52,9 @@
                     <td>{{ value.version }}</td>
                 </tr>
             {% endfor %}
+            {% else %}
+                <p class="text-center">NO RESULT</p>
+            {% endif %}
         </table>
     </div>
 
