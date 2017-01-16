@@ -25,7 +25,7 @@ SECRET_KEY = '6cc07!$@xkva30-yj3qor(ayh=v$l--y^z&n@b96p)8qg16^y3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['139.199.183.196','127.0.0.1','www.ttwilight.cn','118.89.28.194',]
+ALLOWED_HOSTS = ['127.0.0.1','www.ttwilight.cn','118.89.28.194',]
 
 
 # Application definition  c
@@ -136,4 +136,5 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+
 )
