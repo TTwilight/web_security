@@ -10,8 +10,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def index(request):
     ipaddress=request.POST.get('ipadd')
     b=isinstance(ipaddress,str)
-    if os.path.exists(os.path.join(BASE_DIR,'ipsearch/static/ipsearch/test.jpg')):
-        os.remove(os.path.join(BASE_DIR,'ipsearch/static/ipsearch/test.jpg'))
+    if os.path.exists(os.path.join(BASE_DIR,'ipsearch/static/ipsearch/test.jpg')):    #apache 中会找不到app的静态文件，需要使用python manage.py collectstatic 将其收集到根目录static文件下,
+        os.remove(os.path.join(BASE_DIR,'ipsearch/static/ipsearch/test.jpg'))         #然后配置/etc/apache2/sites-available里conf 文件,另外需要将此出以及path处的ipsearch/static/ipsearch/test.jpg
+                                                                                      #换成  static/ipsearch/test.jpg
     if ipaddress:
         a='http://freegeoip.net/json/'+ipaddress
         html=urlopen(a)
