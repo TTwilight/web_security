@@ -42,8 +42,8 @@
                     <th>端口组件</th>
                     <th>组件版本</th>
                 </tr>
-            {% if tcps %}
-            {% for key,value in tcps.items %}
+                {% if tcps %}
+                {% for key,value in tcps.items %}
                 <tr>
                     <td>{{ key }}</td>
                     <td>{{ value.state }}</td>
@@ -51,10 +51,10 @@
                     <td>{{ value.product }}</td>
                     <td>{{ value.version }}</td>
                 </tr>
-            {% endfor %}
-            {% else %}
-                <p class="text-center">NO RESULT</p>
-            {% endif %}
+                {% endfor %}
+                {% else %}
+                    <tr class="text-center"><td colspan="5">NO RESULT</td></tr>
+                {% endif %}
         </table>
     </div>
 
