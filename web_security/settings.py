@@ -25,14 +25,16 @@ SECRET_KEY = '6cc07!$@xkva30-yj3qor(ayh=v$l--y^z&n@b96p)8qg16^y3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','www.ttwilight.cn','118.89.28.194',]
+ALLOWED_HOSTS = ['127.0.0.1','www.ttwilight.cn','123.207.28.159',]
 
 
-# Application definition  c
+# Application definition
 
 INSTALLED_APPS = [
     'encrypt',
     'ipsearch',
+    'hacktools',
+    'scanner',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -61,6 +63,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR,'encrypt/templates'),
             os.path.join(BASE_DIR,'ipsearch/templates'),
             os.path.join(BASE_DIR,'scanner/templates'),
+            os.path.join(BASE_DIR,'hacktools/templates'),
                  ],
         'APP_DIRS': True,
         'OPTIONS': {

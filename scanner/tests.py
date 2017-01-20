@@ -1,10 +1,10 @@
-from django.test import TestCase
+from socket import socket
 
-# Create your tests here.
-import nmap
-
-s=input()
-s=str(s)
-nm=nmap.PortScanner()
-result=nm.scan(s)
-print(result)
+a=input('请输入ip：')
+b=input('请输入端口：')
+s=socket()
+a=str(a)
+b=int(b)
+s.connect((a,b))
+c=s.recv(102400000)
+print(c)

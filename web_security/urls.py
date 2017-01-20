@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^encrypt/',include('encrypt.urls')),
     url(r'^ipsearch/',include('ipsearch.urls')),
     url(r'^scanner/',include(('scanner.urls'))),
+    url(r'^hacktools/',include('hacktools.urls')),
 
 ]
