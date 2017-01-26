@@ -27,7 +27,7 @@
         </nav>
 
     <div class="text-center col-xs-6 col-xs-offset-3">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
             <input type="file" name="upfile" />
             <input type="submit" value="解压" />
