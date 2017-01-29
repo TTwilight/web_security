@@ -25,14 +25,17 @@
                 <li role="presentation"><a href="/admin">管理员</a></li>
             </ul>
         </nav>
-
+    <!--zip解密部分    -->
     <div class="text-center col-xs-6 col-xs-offset-3">
         <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
             <input type="file" name="upfile" />
             <input type="submit" value="解压" />
         </form>
+        <span>{{ res }}</span>
+        <span>{{ a }}</span>
     </div>
+    <!--zip解密部分    -->
 
 </body>
 </html>

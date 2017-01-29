@@ -12,12 +12,15 @@ def index(request):
         des=open(os.path.join('/home/ttwilight',file.name),'wb+')
         for chunk in file.chunks():
             des.write(chunk)
-
         des.close()
-        return HttpResponse('UP OK ')
+        # 实现上传后将文件分块写入服务器存储
+        path='/home/ttwilight/'+file.name
+        res,a=extract_zip(path) #调用zip解压方法
+        return render(request,'hacktools/index.html',{'res':res,'a':a})
     return render(request,'hacktools/index.html')
 
-def extract_zip(path,pwd):
+# zip解压解密方法
+def extract_zip(path):
     zfile=zipfile.ZipFile(path)
     passwd=[]
     with open('/home/ttwilight/pwd.txt','r') as f :
@@ -29,11 +32,10 @@ def extract_zip(path,pwd):
         pwd=pwd.strip('\n')
         pwd=bytes(pwd,encoding='utf-8')
         try:
-            zfile.read(file,pwd=pwd)
+            a=zfile.read(file,pwd=pwd)
             print('打开成功,压缩密码为',pwd)
             password = pwd
-            break
+            return password,a
         except:
             continue
-
-    return password
+    return 'error','error'
