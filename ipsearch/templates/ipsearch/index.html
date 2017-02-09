@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <div class="text-center col-xs-6 col-xs-offset-3">
+    <div class="text-center col-xs-8 col-xs-offset-2">
         <form method="post">
         {% csrf_token %}
             <div style="padding-top: 30px;">
                 <input class='btn form-group' type="text" name="ipadd" placeholder="请输入你要查询的ip地址：" /><input class="btn btn-primary btn-md"  type="submit" value="搜索" />
             </div>
             <div style="padding-top: 30px;">
-                <table class="table ">
-
+                <table class="table">
+                    {% if error %}
+                     <tr>
+                        <td>出错了：{{ error }}</td>
+                     </tr>
+                    {% endif %}
                     <tr>
                         <td>ip地址</td>
                         <td>{{ ipadd }}</td>

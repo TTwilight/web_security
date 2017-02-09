@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-        <div class="text-center col-xs-6 col-xs-offset-3" style="padding-top: 30px">
+        <div class="text-center col-xs-8 col-xs-offset-2" style="padding-top: 30px">
             <p>请选择你要进行的操作:</p>
 
             <form method="post" >
@@ -17,9 +17,9 @@
                 </select>
                     <h2>{{ zhuangtai }}</h2>
                     <div>
-                        <p>{{ jiami1 }}请输入文本/密文：<br><span style="width:400px;height:300px;">{{ form.a }}</span></p>
+                        <p>{{ jiami1 }}请输入文本/密文：<br><span style="width:500px;height:200px;">{{ form.a }}</span></p>
                         <p>{{ jiami2 }}密钥：<br><span style="width:400px;height:100px;">{{ form.b }}</span></p>
-                        <p>获得结果：<br><textarea style="width: 400px;height:300px;">{{ text }}</textarea></p>
+                        <p>获得结果：<br><textarea style="width: 500px;height:200px;">{{ text }}</textarea></p>
                         <input type="submit" value="开始" class="btn btn-primary"/>
                     </div>
 

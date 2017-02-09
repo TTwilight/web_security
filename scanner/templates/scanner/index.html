@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="text-center col-xs-6 col-xs-offset-3">
+    <div class="text-center col-xs-8 col-xs-offset-2">
         <p class="text-center">请输入要扫描的域名或ip地址:</p>
         <form method="post">
             {% csrf_token %}
@@ -30,6 +30,9 @@
                 {% endfor %}
                 {% else %}
                     <tr class="text-center"><td colspan="5">NO RESULT</td></tr>
+                {% endif %}
+                {% if error %}
+                    <tr class="text-center"><td colspan="5">出错了：{{ error }}</td></tr>
                 {% endif %}
         </table>
     </div>
