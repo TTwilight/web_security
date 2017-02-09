@@ -38,7 +38,7 @@ def extract_zip(path):
         else:
             filelist.append(name)
     passwd=[]
-    with open('static/dict/zip_pwd.txt','r') as f :
+    with open('static/dict/zip_pwd.txt','r') as f :  #服务器可以修改为绝对路径
         for line in f.readlines():
             passwd.append(str(line))
 
