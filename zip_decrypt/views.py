@@ -38,7 +38,7 @@ def extract_zip(path):
         else:
             filelist.append(name)
     passwd=[]
-    with open('/usr/zor_test/dict/zip_pwd.txt','r') as f :
+    with open('static/dict/zip_pwd.txt','r') as f :
         for line in f.readlines():
             passwd.append(str(line))
 
