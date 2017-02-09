@@ -16,7 +16,7 @@ def index(request):
             des.write(chunk)
         des.close()
         # 实现上传后将文件分块写入服务器存储
-        path='/home/ttwilight/'+file.name
+        path=newfilename
         try:
             filelist,dirlist,password=extract_zip(path) #调用zip解压方法
             return render(request,'zip_decrypt/index.html',{'filelist':filelist,'dirlist':dirlist,'password':password,'zipname':zipname})
