@@ -1,0 +1,43 @@
+<!--base.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>web test</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color:	#000000	;font-size: 16px" class="text-warning">
+        <nav class="text-center col-xs-8 col-xs-offset-2" style="padding-top: 30px">
+            <ul class="nav nav-pills" role="tablist">
+                <li role="presentation"><a href="/">Home</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">信息收集<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/scanner">扫描</a></li>
+                    <li><a href="/ipsearch">ip查询</a></li>
+                    <li><a href="#">whois查询</a></li>
+                    <li><a href="#">pass</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">小工具<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/encrypt">加密</a></li>
+                    <li><a href="/zip_decrypt">zip解密</a></li>
+                    <li><a href="#">ftp弱密码</a></li>
+                    <li><a href="#">ssh弱密码</a></li>
+                  </ul>
+                </li>
+                <li role="presentation"><a href="#">pass</a></li>
+                <li role="presentation"><a href="/admin/">管理员</a></li>
+            </ul>
+        </nav>
+        <div class="text-center col-xs-8 col-xs-offset-2">
+            {% block content %}
+            {% endblock %}
+        </div>
+</body>
+</html>

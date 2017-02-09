@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['127.0.0.1','www.ttwilight.cn','123.207.28.159',]
 INSTALLED_APPS = [
     'encrypt',
     'ipsearch',
-    'hacktools',
+    'zip_decrypt',
     'scanner',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -63,7 +63,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR,'encrypt/templates'),
             os.path.join(BASE_DIR,'ipsearch/templates'),
             os.path.join(BASE_DIR,'scanner/templates'),
-            os.path.join(BASE_DIR,'hacktools/templates'),
+            os.path.join(BASE_DIR,'zip_decrypt/templates'),
                  ],
         'APP_DIRS': True,
         'OPTIONS': {

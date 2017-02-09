@@ -13,19 +13,23 @@ def extract_zip(pwd):
 if os.path.exists(path):
     zfile=zipfile.ZipFile(path)
     passwd=[]
-    with open('/home/ttwilight/pwd.txt') as f:
+    with open('/usr/zor_test/dict/zip_pwd.txt') as f:
         for line in f.readlines():
+            line.strip('\r\n')
+            passwd.append(str(line))
 
-            passwd.append(line)
     for pwd in passwd:
-        file = zfile.namelist()[0]
+        file = zfile.namelist()[3]
         pwd=pwd.strip('\n')
-        pwd=bytes(pwd,encoding='utf-8')
+        pwd=bytes(pwd,'utf-8')
         try:
-            text = zfile.read(file, pwd=pwd)
-            print(str(text, encoding='utf-8'),'正确的密码为',pwd)
+            zfile.extractall(pwd=pwd)
+
+            print('正确的密码为',pwd)
         except:
             continue
+
+
 
 
 

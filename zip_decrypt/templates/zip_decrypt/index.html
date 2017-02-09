@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!--zip解密部分    -->
+    <div class="text-center col-xs-8 col-xs-offset-2">
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <input type="file" name="upfile" />
+            <input type="submit" value="解压" />
+        </form>
+        <table class="table table-hover text-left">
+                    <tr>
+                        <td>zip文件名</td>
+                        <td>{{ zipname }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>文件列表</td>
+                        <td>
+                            {% for file in filelist %}
+                                {{ file }}<br>
+                            {% endfor %}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>目录列表</td>
+                        <td>
+                            {% for dir in dirlist %}
+                                {{ dir }}<br>
+                            {% endfor %}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>文件数量</td>
+                        <td>{{ filelist | length }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>目录数量</td>
+                        <td>{{ dirlist | length }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>解压密码</td>
+                        <td>{{ password }}</td>
+                    </tr>
+        </table>
+    </div>
+    <!--zip解密部分    -->
+{% endblock %}
