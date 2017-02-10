@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="text-center col-xs-8 col-xs-offset-2">
+        <h1>test ssh</h1>
+        <form method="post">
+        {% csrf_token %}
+            <input type="text" name="hostname" class="btn" placeholder="请输入目标主机ip" />
+            <input type="submit" class="btn btn-primary" value="开始">
+        </form>
+         <table class="table">
+             {% if host %}
+             <tr>
+                 <td colspan="2">目标主机ip：{{ host }}</td>
+             </tr>
+             {% if error %}
+             <tr>
+                 <td colspan="2">{{ error }}</td>
+             </tr>
+
+             {% else %}
+             <tr>
+                 <td colspan="2">爆破成功</td>
+             </tr>
+             <tr>
+                 <td>用户名</td>
+                 <td>{{ user }}</td>
+             </tr>
+             <tr>
+                 <td>密  码</td>
+                 <td>{{ passwd }}</td>
+             </tr>
+             {% endif %}
+             {% endif %}
+         </table>
+
+    </div>
+{% endblock %}

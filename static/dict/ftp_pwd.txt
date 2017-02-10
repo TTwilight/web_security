@@ -1,0 +1,5 @@
+admin:admin
+admin:123456
+admin:111111
+admin:222222
+testftp:testftp

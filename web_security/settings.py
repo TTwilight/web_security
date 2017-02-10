@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'ipsearch',
     'zip_decrypt',
     'scanner',
+    'ssh_cracker',
+    'ftp_cracker',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -64,6 +66,8 @@ TEMPLATES = [
             os.path.join(BASE_DIR,'ipsearch/templates'),
             os.path.join(BASE_DIR,'scanner/templates'),
             os.path.join(BASE_DIR,'zip_decrypt/templates'),
+            os.path.join(BASE_DIR,'ssh_cracker/templates'),
+            os.path.join(BASE_DIR,'ftp_cracker/templates'),
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
