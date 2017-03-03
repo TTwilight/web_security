@@ -24,7 +24,8 @@ urlpatterns = [
     url(r'^ipsearch/',include('ipsearch.urls')),
     url(r'^scanner/',include(('scanner.urls'))),
     url(r'^zip_decrypt/',include('zip_decrypt.urls')),
-    url(r'^ssh_cracker',include('ssh_cracker.urls')),
-    url(r'^ftp_cracker',include('ftp_cracker.urls')),
+    url(r'^ssh_cracker/',include('ssh_cracker.urls')),
+    url(r'^ftp_cracker/',include('ftp_cracker.urls')),
+    url(r'^seebug_mod/',include('seebug_mod.urls')),
 ]
 

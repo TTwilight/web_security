@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'scanner',
     'ssh_cracker',
     'ftp_cracker',
+    'seebug_mod',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -68,6 +69,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR,'zip_decrypt/templates'),
             os.path.join(BASE_DIR,'ssh_cracker/templates'),
             os.path.join(BASE_DIR,'ftp_cracker/templates'),
+            os.path.join(BASE_DIR,'seebug_mod/templates'),
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
