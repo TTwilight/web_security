@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="text-center col-xs-8 col-xs-offset-2">
+        <h1>SEEBUG</h1>
+        <div>
+            <table class="table">
+            {% for name in names %}
+                <tr>
+                    <td>{{ name.SSV_ID }}</td>
+                    <td>{{ name.Push_time }}</td>
+                    <td>{{ name.Level}}</td>
+                    <td>{{ name.Poc_name }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
