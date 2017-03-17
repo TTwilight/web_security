@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="text-center col-xs-8 col-xs-offset-2">
+    <div class="text-center col-md-12">
         <h1>SEEBUG</h1>
         <div class="search" style="padding-bottom: 30px;">
-            <form method="post">
+            <form method="GET" action="/seebug_mod/">
                 {% csrf_token %}
-                <h1>{{ search_content }}</h1>
                 <input type="text" name="search_content" placeholder="输入查询条件" class="btn"/>
                 <select  name="search_type" class="btn btn-primary">
                     <option >请选择查询方式</option>
@@ -19,12 +18,30 @@
         </div>
         <div class="poc_list" >
             <table class="table">
+                <tr>
+                    <th>SSV ID</th>
+                    <th>提交时间</th>
+                    <th>漏洞等级</th>
+                    <th>漏洞名称</th>
+                    <th>CVE</th>
+                    <th>PoC</th>
+                    <th>靶场</th>
+                    <th>详情</th>
+                    <th>图表</th>
+                </tr>
             {% for poc in pocs %}
                 <tr>
                     <td>{{ poc.SSV_ID }}</td>
                     <td>{{ poc.Push_time }}</td>
                     <td>{{ poc.Level}}</td>
                     <td>{{ poc.Poc_name }}</td>
+                    <td>{{poc.Has_cve }}</td>
+                    <td>{{poc.Has_poc }}</td>
+                    <td>{{poc.Has_target }}</td>
+                    <td>{{poc.Has_detail }}</td>
+                    <td>{{poc.Has_chart }}</td>
+
+
                 </tr>
             {% endfor %}
             </table>
@@ -32,30 +49,30 @@
         <div class="pagination">
             <span class="step-links">
                 {% if pocs.has_previous %}
-                    <a href="?page={{ pocs.previous_page_number }}">上一页</a>
+                    <a href="??csrfmiddlewaretoken={{ csrfmiddlewaretoken }}&search_content={{ search_content }}&search_type={{ search_type }}&page={{ pocs.previous_page_number }}">上一页</a>
                 {% endif %}
                 {% if pocs.number > 5 %}
-                <a href="?page=1">首页</a>
+                <a href="?csrfmiddlewaretoken={{ csrfmiddlewaretoken }}&search_content={{ search_content }}&search_type={{ search_type }}&page=1">首页</a>
                 <span>...</span>
                 {% endif %}
 
                 {% for bpa in before_pages%}
-                    <a href="?page={{ bpa }}">{{bpa}}页</a>
+                    <a href="?csrfmiddlewaretoken={{ csrfmiddlewaretoken }}&search_content={{ search_content }}&search_type={{ search_type }}&page={{ bpa }}">{{bpa}}页</a>
                 {% endfor %}
                 <span class="current">
                     当前页数{{ pocs.number }}/{{pocs.paginator.num_pages }}
                 </span>
                 {% for apa in after_pages%}
-                    <a href="?page={{ apa }}">{{apa}}页</a>
+                    <a href="?csrfmiddlewaretoken={{ csrfmiddlewaretoken }}&search_content={{ search_content }}&search_type={{ search_type }}&page={{ apa }}">{{apa}}页</a>
                 {% endfor %}
 
                 {% if pocs.number <=  pocs.paginator.num_pages|add:-5  %}
                 <span>...</span>
-                <a href="?page={{ pocs.paginator.num_pages }}">{{ pocs.paginator.num_pages }}</a>
+                <a href="?csrfmiddlewaretoken={{ csrfmiddlewaretoken }}&search_content={{ search_content }}&search_type={{ search_type }}&page={{ pocs.paginator.num_pages }}">{{ pocs.paginator.num_pages }}</a>
                 {% endif %}
 
                 {% if pocs.has_next %}
-                    <a href="?page={{ pocs.next_page_number }}">下一页</a>
+                    <a href="?csrfmiddlewaretoken={{ csrfmiddlewaretoken }}&search_content={{ search_content }}&search_type={{ search_type }}&page={{ pocs.next_page_number }}">下一页</a>
                 {% endif %}
             </span>
             <form method="post">
