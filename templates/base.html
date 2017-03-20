@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Web_Security</title>
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
 </head>
 <body style="background-color: #333333;color: #d5d5d5;" >
 
     <nav id="nav" style="background-color: #333333; padding-top: 15px; padding-bottom: 15px;" class="container-fluid">
         <div >
-            <div class="col-xs-2 col-md-3 text-left">
-                <span class="text-center" style="font-size: 25px">Web 渗透测试系统</span>
+            <div class="col-xs-2 col-md-2 ">
+                <span class="text-center" style="font-size: 20px">Web 渗透测试系统</span>
             </div>
-            <div class="btn-group container col-xs-10 col-md-9" >
+            <div class="btn-group container col-xs-10 col-md-9 text-left" >
                 <button type="button" class="btn" style="background-color: #333333;color: #dddddd"><a href="/" style="text-decoration:none;color: #d5d5d5;font-size: 15px;margin: 0 auto;">首页</a></button>
                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #333333;color: #dddddd">
-                    Action <span class="caret"></span>
+                    Service <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
                     <li><a href="#">Service</a></li>
@@ -74,52 +75,83 @@
                 <div class="list-group">
                     <span class="list-group-item disabled"><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span> 登录</span>
                     <div>
-                        <form class="form-group" method="post" action="/admin">
+                        <form class="form-group" method="post" action="/admin/login/?next=/admin/">
+                            {% csrf_token %}
                             <input type="text" class="form-control" placeholder="Username" name="username"/>
                             <input type="password" class="form-control" placeholder="Password" name="password"/>
-                            <button class="btn btn-default navbar-btn" >sign in</button>
-                            <button class="btn btn-default navbar-btn">sign up</button>
+                            <button class="btn btn-default navbar-btn" type="submit">登录</button>
+                            <button class="btn btn-default navbar-btn" type="button">注册</button>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12" style="background-color:  #d5d5d5">
-            <span class="list-group-item disabled"><span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>  Seebug离线数据</span>
+            <div class="col-xs-12" style="background-color:  #d5d5d5;padding-top: 10px" >
+                <a href="/seebug_mod" style="text-decoration:none">
+                    <span class="list-group-item disabled"><span class="glyphicon glyphicon-cloud" aria-hidden="true">
+                    </span>Seebug离线数据(共<span id="alls" style="font-size: 10px"></span>)</span>
+                </a>
+                <br/>
 
+                <a href="/seebug_mod/?csrfmiddlewaretoken=None&search_content=cve&search_type=5" style="text-decoration:none">
+                <span style="color: #333333;font-size: 10px">有CVE(共<span id="cve_count" ></span>)</span>
                 <div class="progress">
-                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        <span>有CVE</span>
+                    <div id="cve_table" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
                     </div>
                 </div>
+                    </a>
 
+                <a href="/seebug_mod/?csrfmiddlewaretoken=None&search_content=有&search_type=6" style="text-decoration:none">
+                 <span style="color: #333333;font-size: 10px">有Poc(共<span id="poc_count"></span>)</span>
                 <div class="progress">
-                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                        <span>有Poc</span>
+                    <div id="poc_table" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" >
                     </div>
                 </div>
+                </a>
 
+                <a href="/seebug_mod/?csrfmiddlewaretoken=None&search_content=有&search_type=7" style="text-decoration:none">
+                <span style="color: #333333;font-size: 10px">有靶场(共<span id="target_count"></span>)</span>
                 <div class="progress">
-                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                        <span>有靶场</span>
+                    <div id="target_table" class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" >
                     </div>
                 </div>
+                </a>
 
+                <a href="/seebug_mod/?csrfmiddlewaretoken=None&search_content=有&search_type=8" style="text-decoration:none">
+                <span style="color: #333333;font-size: 10px">有详情(共<span id="detail_count" ></span>)</span>
                 <div class="progress">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                        <span>有详情</span>
+                    <div id="detail_table" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" >
                     </div>
                 </div>
+                </a>
 
+                <a href="/seebug_mod/?csrfmiddlewaretoken=None&search_content=有&search_type=9" style="text-decoration:none">
+                <span style="color: #333333;font-size: 10px">有图表(共<span id="chart_count"></span>)</span>
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                        <span>有图表</span>
+                    <div id="chart_table" class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" >
                     </div>
                 </div>
+                </a>
 
-                <span><a href="/seebug_mod" class="text-center">>>查看详情<<</a></span>
+                <div  class="text-center"><span><a href="/seebug_mod" style="text-decoration: none;color: #333333">>>查看详情<<</a></span></div>
             </div>
         </div>
     </div>
+<script type="text/javascript">
+        $.getJSON('/seebug_mod/ajax_chart/',function (ret) {
 
+            document.getElementById('cve_table').style.width=ret.cve_table;
+            document.getElementById('poc_table').style.width=ret.poc_table;
+            document.getElementById('target_table').style.width=ret.target_table;
+            document.getElementById('detail_table').style.width=ret.detail_table;
+            document.getElementById('chart_table').style.width=ret.chart_table;
+            $('#alls').text(ret.all);
+            $('#cve_count').text(ret.cve_count);
+            $('#poc_count').text(ret.poc_count);
+            $('#target_count').text(ret.target_count);
+            $('#detail_count').text(ret.detail_count);
+            $('#chart_count').text(ret.chart_count);
+
+        })
+    </script>
 </body>
 </html>

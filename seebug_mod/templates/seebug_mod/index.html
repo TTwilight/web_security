@@ -12,10 +12,16 @@
                     <option value="2" >按 SSVID 查询</option>
                     <option value="3" >按提交时间查询</option>
                     <option value="4" >按漏洞等级查询</option>
+                    <option value="5" >按有无CVE查询</option>
+                    <option value="6" >按有无Poc查询</option>
+                    <option value="7" >按有无靶场查询</option>
+                    <option value="8" >按有无详情查询</option>
+                    <option value="9" >按有无图表查询</option>
                 </select>
                 <input type="submit" value="搜索" class="btn btn-primary" />
             </form>
         </div>
+
         <div class="poc_list" >
             <table class="table">
                 <tr>
@@ -49,7 +55,7 @@
         <div class="pagination">
             <span class="step-links">
                 {% if pocs.has_previous %}
-                    <a href="??csrfmiddlewaretoken={{ csrfmiddlewaretoken }}&search_content={{ search_content }}&search_type={{ search_type }}&page={{ pocs.previous_page_number }}">上一页</a>
+                    <a href="?csrfmiddlewaretoken={{ csrfmiddlewaretoken }}&search_content={{ search_content }}&search_type={{ search_type }}&page={{ pocs.previous_page_number }}">上一页</a>
                 {% endif %}
                 {% if pocs.number > 5 %}
                 <a href="?csrfmiddlewaretoken={{ csrfmiddlewaretoken }}&search_content={{ search_content }}&search_type={{ search_type }}&page=1">首页</a>
@@ -74,12 +80,15 @@
                 {% if pocs.has_next %}
                     <a href="?csrfmiddlewaretoken={{ csrfmiddlewaretoken }}&search_content={{ search_content }}&search_type={{ search_type }}&page={{ pocs.next_page_number }}">下一页</a>
                 {% endif %}
+                <span style="font-size: 10px">【共{{ counts }}条结果,花费{{ spend_times }} 秒】</span>
             </span>
             <form method="post">
                 {% csrf_token %}
-                <input type="text" name="page" placeholder="输入页数"/>
-                <input type="submit" value="跳转" />
+                <input type="text" name="page" placeholder="输入页数" class="btn"/>
+                <input type="submit" value="跳转" class="btn btn-default"/>
             </form>
         </div>
     </div>
+
+
 {% endblock %}

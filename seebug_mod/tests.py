@@ -8,7 +8,7 @@ import time
 from threading import Thread
 # Create your tests here.
 def get_info(url):
-
+    i=1
     seebug = pymysql.Connect(db='web_security', user='root', passwd='lpl2016val',charset="utf8")
     cur = seebug.cursor()
     headers={
@@ -18,6 +18,7 @@ def get_info(url):
     soup = BeautifulSoup(html, 'lxml')
     vul_list=soup.find('table',attrs={'class':'table sebug-table table-vul-list'}).find('tbody').find_all('tr')
     for vul in vul_list:
+        i=i+1
 
         SSV_ID=re.findall('\<td\>\<a\x20href\=\"\/vuldb\/ssvid\-\d+\"\>(SSV\-\d+)\<\/a\>',str(vul))
 
@@ -25,23 +26,33 @@ def get_info(url):
         Level=vul.find('div',attrs={'data-toggle':'tooltip'})['data-original-title'].encode('utf-8')
         Poc_name=vul.find('a',attrs={'class':'vul-title'})['title'].encode('utf-8')
         Detail_link=vul.find('a',attrs={'class':'vul-title'})['href'].encode('utf-8')
-        Has_cve=re.findall('\<i\x20class\=\"fa\x20fa\-id\-card\x20text\-muted\x20\"\x20data\-original\-title\=\"(.*?)\"',str(vul))
-        Has_poc=re.findall('\<i\x20class\=\"fa\x20fa\-rocket\x20text\-muted\x20\"\x20data\-original\-title\=\"(.*?)\"',str(vul))
-        Has_target=re.findall('\<i\x20class\=\"fa\x20fa\-bullseye\x20text\-muted\x20\"\x20data\-original\-title\=\"(.*?)\"',str(vul))
-        Has_detail=re.findall('\<i\x20class\=\"fa\x20fa\-file\-text\-o\x20\"\x20data\-original\-title\=\"(.*?)\"',str(vul))
-        Has_chart=re.findall('\<i\x20class\=\"fa\x20fa\-signal\x20text\-muted\"\x20data\-original\-title\=\"(.*?)\"',str(vul))
+        Has_cve=vul.find_all('i')[0]['data-original-title'].replace('无 CVE','无').encode('utf-8')
+        Has_poc=vul.find_all('i')[1]['data-original-title'].encode('utf-8')
+        Has_target=vul.find_all('i')[2]['data-original-title'].encode('utf-8')
+        Has_detail=vul.find_all('i')[3]['data-original-title'].encode('utf-8')
+        Has_chart=vul.find_all('i')[4]['data-original-title'].encode('utf-8')
+        # Has_cve=re.findall('\<i\x20class\=\"fa\x20fa\-id\-card\x20text\-muted\x20\"\x20data\-original\-title\=\"(.*?)\"',str(vul))
+        # Has_poc=re.findall('\<i\x20class\=\"fa\x20fa\-rocket\x20text\-muted\x20\"\x20data\-original\-title\=\"(.*?)\"',str(vul))
+        # Has_target=re.findall('\<i\x20class\=\"fa\x20fa\-bullseye\x20text\-muted\x20\"\x20data\-original\-title\=\"(.*?)\"',str(vul))
+        # Has_detail=re.findall('\<i\x20class\=\"fa\x20fa\-file\-text\-o\x20\"\x20data\-original\-title\=\"(.*?)\"',str(vul))
+        # Has_chart=re.findall('\<i\x20class\=\"fa\x20fa\-signal\x20text\-muted\"\x20data\-original\-title\=\"(.*?)\"',str(vul))
+        print(SSV_ID, Push_time, Level, Poc_name, Detail_link,Has_cve,Has_poc,Has_target,Has_detail,Has_chart)
         try:
             cur.execute(
                 'insert into seebug_mod_seebug (SSV_ID,Push_Time,Level,Poc_name,Detail_link,Has_cve,Has_poc,Has_target,Has_detail,Has_chart) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ;',
                 (SSV_ID, Push_time, Level, Poc_name, Detail_link,Has_cve,Has_poc,Has_target,Has_detail,Has_chart))
-        except:
-           continue
+        except Exception as e :
+            print(e)
+            continue
     seebug.commit()
     cur.close()
     seebug.close()
-    time.sleep(2)
+    return i
 
-urls=['https://www.seebug.org/vuldb/vulnerabilities?page={}'.format(str(i)) for i in range(0,200)]
-
+urls=['https://www.seebug.org/vuldb/vulnerabilities?page={}'.format(str(i)) for i in range(201,401)]
+i=1
 for url in urls:
-    get_info(url)
+    a=get_info(url)
+    i=i+a
+    print(i)
+print(i)

@@ -5,21 +5,24 @@ from bs4 import BeautifulSoup
 import re
 from .models import seebug
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
-
+from django.http import JsonResponse
+import time
 # Create your views here.
 def index(request):
+    start_time=time.time()
     search_content=request.GET.get('search_content')
     search_type=request.GET.get('search_type')
     csrfmiddlewaretoken=request.GET.get('csrfmiddlewaretoken')
     if search_content:
         search_content = str(search_content).strip()
         search_type = int(search_type)
-        poc_list=search(search_content,search_type)
+        poc_list,counts=search(search_content,search_type)  #返回poc_list,以及相应搜索结果数量
         paginator = Paginator(poc_list, 10)
 
     else:
         search_content = ''
         poc_list=seebug.objects.all().order_by('-Push_time')
+        counts=len(poc_list)
         paginator=Paginator(poc_list,10)
 
     tiaozhuan=request.POST.get('page')
@@ -29,25 +32,41 @@ def index(request):
         page=request.GET.get('page')
 
     pocs, before_pages, after_pages=show_page(page,paginator)  #传入当前页数,需要分页的对象
-
+    end_time=time.time()
+    spend_times='%.7s' % str((end_time-start_time))  #返回耗时
     return render(request,'seebug_mod/index.html',
                   {'pocs':pocs,'before_pages':before_pages,
                    'after_pages':after_pages,'search_content':search_content,
-                   'search_type':search_type,'page':page,'csrfmiddlewaretoken':csrfmiddlewaretoken})
+                   'search_type':search_type,'page':page,'csrfmiddlewaretoken':csrfmiddlewaretoken,'counts':counts,'spend_times':spend_times})
     # return render_to_response('seebug_mod/index.html', locals())
 def search(content,type=1):
-    if type==2:
+    if type==2:  #按SSV_ID查询
         poc_list = seebug.objects.filter(SSV_ID__icontains=content).order_by('-Push_time')
-        return poc_list
-    elif type==3:
+        return poc_list,len(poc_list)
+    elif type==3: #按提交时间查询
         poc_list = seebug.objects.filter(Push_time__icontains=content).order_by('-Push_time')
-        return poc_list
-    elif type==4:
+        return poc_list,len(poc_list)
+    elif type==4: #按漏洞等级查询
         poc_list = seebug.objects.filter(Level__icontains=content).order_by('-Push_time')
-        return poc_list
-    else:
+        return poc_list,len(poc_list)
+    elif type==5: #按有无CVE查询
+        poc_list = seebug.objects.filter(Has_cve__icontains=content).order_by('-Push_time')
+        return poc_list,len(poc_list)
+    elif type==6: #按有无Poc查询
+        poc_list = seebug.objects.filter(Has_poc__icontains=content).order_by('-Push_time')
+        return poc_list,len(poc_list)
+    elif type==7: #按有无靶场查询
+        poc_list = seebug.objects.filter(Has_target__icontains=content).order_by('-Push_time')
+        return poc_list,len(poc_list)
+    elif type==8: #按有无详情查询
+        poc_list = seebug.objects.filter(Has_detail__icontains=content).order_by('-Push_time')
+        return poc_list,len(poc_list)
+    elif type==9: #按有无图表查询
+        poc_list = seebug.objects.filter(Has_chart__icontains=content).order_by('-Push_time')
+        return poc_list,len(poc_list)
+    else:       #按漏洞名称查询
         poc_list = seebug.objects.filter(Poc_name__icontains=content).order_by('-Push_time')
-        return poc_list
+        return poc_list,len(poc_list)
 def show_page(page,paginator):
     try:
         pocs = paginator.page(page)
@@ -65,6 +84,28 @@ def show_page(page,paginator):
         after_pages = range(pocs.number + 1, pocs.number + 5)
 
     return pocs,before_pages,after_pages
+def ajax_chart(request):
+    all=len(seebug.objects.all())
+    cve_table=str((all-len(seebug.objects.filter(Has_cve__icontains='无')))/all*100)+'%'
+    poc_table=str((all-len(seebug.objects.filter(Has_poc__icontains='无 PoC')))/all*100)+'%'
+    target_table=str((all-len(seebug.objects.filter(Has_target__icontains='无靶场')))/all*100)+'%'
+    detail_table=str((all-len(seebug.objects.filter(Has_detail__icontains='无详情')))/all*100)+'%'
+    chart_table=str((all-len(seebug.objects.filter(Has_chart__icontains='无影响图表')))/all*100)+'%'
+    seebug_table_dict={
+        'all':all,
+        'cve_table':cve_table,
+        'cve_count':(all-len(seebug.objects.filter(Has_cve__icontains='无'))),
+        'poc_table':poc_table,
+        'poc_count':(all-len(seebug.objects.filter(Has_poc__icontains='无 PoC'))),
+        'target_table':target_table,
+        'target_count':(all-len(seebug.objects.filter(Has_target__icontains='无靶场'))),
+        'detail_table':detail_table,
+        'detail_count':(all-len(seebug.objects.filter(Has_detail__icontains='无详情'))),
+        'chart_table':chart_table,
+        'chart_count':(all-len(seebug.objects.filter(Has_chart__icontains='无影响图表'))),
+
+    }
+    return JsonResponse(seebug_table_dict)
 
 # def get_info(url):
 #     seebug = pymysql.Connect(db='web_security', user='root', passwd='lpl2016val',charset="utf8")
