@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'ssh_cracker',
     'ftp_cracker',
     'seebug_mod',
+    'account',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -71,6 +72,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR,'ssh_cracker/templates'),
             os.path.join(BASE_DIR,'ftp_cracker/templates'),
             os.path.join(BASE_DIR,'seebug_mod/templates'),
+            os.path.join(BASE_DIR,'account/templates'),
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -148,3 +150,5 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 
 )
+
+LOGIN_URL = '/account/register/'

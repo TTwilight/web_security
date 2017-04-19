@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url,include
-from django.contrib import admin
+from django.contrib import admin,auth
 from . import views
 
 urlpatterns = [
@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^ssh_cracker/',include('ssh_cracker.urls')),
     url(r'^ftp_cracker/',include('ftp_cracker.urls')),
     url(r'^seebug_mod/',include('seebug_mod.urls')),
+    url(r'^account/',include('account.urls')),
 ]
 

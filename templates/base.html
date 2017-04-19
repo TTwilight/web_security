@@ -79,8 +79,8 @@
                             {% csrf_token %}
                             <input type="text" class="form-control" placeholder="Username" name="username"/>
                             <input type="password" class="form-control" placeholder="Password" name="password"/>
-                            <button class="btn btn-default navbar-btn" type="submit">登录</button>
-                            <button class="btn btn-default navbar-btn" type="button">注册</button>
+                            <button class="btn btn-default navbar-btn" type="submit"><a href="/account/login" style="text-underline: none">登录</a></button>
+                            <button class="btn btn-default navbar-btn" type="button"><a href="/account/register/" style="text-underline: none">注册</a></button>
                         </form>
                     </div>
                 </div>
