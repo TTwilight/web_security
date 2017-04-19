@@ -3,7 +3,8 @@
     <div class="text-center col-xs-8 col-xs-offset-2" style="padding-top: 30px">
         <form method="post">
             {% csrf_token %}
-            {{ userform }}
+            {{ userform.username }}<br>
+            {{ userform.password }}<br>
             <input type="submit" value="注册" />
         </form>
     </div>
