@@ -25,7 +25,7 @@ SECRET_KEY = '6cc07!$@xkva30-yj3qor(ayh=v$l--y^z&n@b96p)8qg16^y3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','www.ttwilight.cn','123.207.28.159',]
+ALLOWED_HOSTS = ['127.0.0.1','www.example.com',]
 
 
 # Application definition
@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'ssh_cracker',
     'ftp_cracker',
     'seebug_mod',
-    'account',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,7 +71,6 @@ TEMPLATES = [
             os.path.join(BASE_DIR,'ssh_cracker/templates'),
             os.path.join(BASE_DIR,'ftp_cracker/templates'),
             os.path.join(BASE_DIR,'seebug_mod/templates'),
-            os.path.join(BASE_DIR,'account/templates'),
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -96,8 +94,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'web_security',
-        'USER': 'root',
-        'PASSWORD': 'lpl2016val',
+        'USER': 'test',
+        'PASSWORD': 'test',
         'HOST': '127.0.0.1',
         'PORT':'',
     }
@@ -150,5 +148,3 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 
 )
-
-LOGIN_URL = '/account/register/'
