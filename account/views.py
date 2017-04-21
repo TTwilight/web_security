@@ -28,11 +28,12 @@ def register(request):
             else:
                 try:
                     user=User.objects.create_user(username,email,password)
+                    user.is_active=False
                     user.save()
                 except Exception :
                     error='该用户名已存在！'
                     return render(request, 'account/register.html', {'error': error})
-                return render(request,'account/success.html',{'new':True,'username':username})
+                return render(request,'account/register.html',{'new':True,'username':username})
 
 
     userform=UserForm()

@@ -14,6 +14,9 @@
 {% if error %}
     <h3>error: {{ error }}</h3>
 {% endif %}
+{% if new %}
+    <h3>注册成功，请等待管理员审核。您的用户名为：{{ username }}</h3>
+{% endif %}
 <form method = 'post' enctype="multipart/form-data">
     {% csrf_token %}
     {{userform.as_p}}
