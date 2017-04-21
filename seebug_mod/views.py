@@ -1,4 +1,5 @@
 from django.shortcuts import render,HttpResponse,render_to_response
+from django.contrib.auth.decorators import login_required
 import MySQLdb,pymysql
 import requests
 from bs4 import BeautifulSoup
@@ -8,6 +9,7 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.http import JsonResponse
 import time
 # Create your views here.
+@login_required
 def index(request):
     start_time=time.time()
     search_content=request.GET.get('search_content')

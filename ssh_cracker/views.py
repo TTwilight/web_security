@@ -1,8 +1,10 @@
 from django.shortcuts import render
 import socket
 from pexpect import pxssh
-# Create your views here.
+from django.contrib.auth.decorators import login_required
 
+# Create your views here.
+@login_required
 def index(request):
     host=request.POST.get('hostname')
     if host:

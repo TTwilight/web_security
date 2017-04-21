@@ -3,7 +3,9 @@ from django.shortcuts import render
 # Create your views here.
 from urllib.request import Request,urlopen
 import nmap,socket
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def index(request):
     host=request.POST.get('host_name')
     if host:

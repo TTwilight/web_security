@@ -5,8 +5,11 @@ import nmap
 import json
 import os
 from binascii import a2b_hex,b2a_hex
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+@login_required
 def index(request):
     ipaddress=request.POST.get('ipadd')
 

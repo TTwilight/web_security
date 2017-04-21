@@ -1,7 +1,10 @@
 from django.shortcuts import render
 import socket
 import ftplib
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
+@login_required
 def index(request):
     host = request.POST.get('hostname')
     if host:

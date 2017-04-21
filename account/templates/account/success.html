@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
+
     <div class="text-center col-xs-8 col-xs-offset-2" style="padding-top: 30px">
-        <h1>welcome,{{username}}</h1>
+        {% if new %}
+        <h2>欢迎，新用户：{{username}}</h2>
+        {% else %}
+        <h2>欢迎回来，{{ username }}</h2>
+        {% endif %}
     </div>
+
 {% endblock %}

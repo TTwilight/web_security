@@ -1,11 +1,26 @@
-{% extends 'base.html' %}
-{% block content %}
-    <div class="text-center col-xs-8 col-xs-offset-2" style="padding-top: 30px">
-        <form method="post">
-            {% csrf_token %}
-            <span>用户：</span>{{ userform.username }}<br>
-            <span>密码：</span>{{ userform.password }}<br>
-            <input type="submit" value="登录" />
-        </form>
-    </div>
-{% endblock %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>登陆</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body class="col-xs-6 text-center">
+<h3>登陆页面：</h3>
+<div>
+<form method = 'post' enctype="multipart/form-data">
+    {% csrf_token %}
+    {{userform.as_p}}
+    <button type="submit" class="btn">登录</button>
+    <button class="btn" type="button">
+    <a href="/account/register">注册</a>
+    </button>
+</form>
+</div>
+</body>
+</html>

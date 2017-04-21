@@ -49,7 +49,7 @@ def get_info(url):
     seebug.close()
     return i
 
-urls=['https://www.seebug.org/vuldb/vulnerabilities?page={}'.format(str(i)) for i in range(201,401)]
+urls=['https://www.seebug.org/vuldb/vulnerabilities?page={}'.format(str(i)) for i in range(0,401)]
 i=1
 for url in urls:
     a=get_info(url)

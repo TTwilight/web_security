@@ -1,11 +1,26 @@
-{% extends 'base.html' %}
-{% block content %}
-    <div class="text-center col-xs-8 col-xs-offset-2" style="padding-top: 30px">
-        <form method="post">
-            {% csrf_token %}
-            {{ userform.username }}<br>
-            {{ userform.password }}<br>
-            <input type="submit" value="注册" />
-        </form>
-    </div>
-{% endblock %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>注册</title>
+     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body class="col-xs-6 text-center">
+<h1>注册页面：</h1>
+{% if error %}
+    <h3>error: {{ error }}</h3>
+{% endif %}
+<form method = 'post' enctype="multipart/form-data">
+    {% csrf_token %}
+    {{userform.as_p}}
+    <button type="submit" class="btn">注册</button>
+    <button type="button" class="btn">
+    <a href="/account/login">已有帐号，登陆</a></button>
+</form>
+
+</body>
+</html>

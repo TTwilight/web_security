@@ -5,8 +5,10 @@ from Crypto.Cipher import AES
 from Crypto.Cipher import DES
 from binascii import b2a_hex,a2b_hex
 import base64
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def index(request):
     a= request.POST
     if len(a)==0:
